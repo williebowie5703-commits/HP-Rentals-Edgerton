@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HP Rentals of Edgerton — Trailer Rentals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #111110;
+    --off-white: #F5F3EE;
+    --cream: #EAE6DC;
+    --steel: #3A4A5C;
+    --rust: #C04E1A;
+    --rust-dark: #8E3410;
+    --rust-light: #F0EBE6;
+    --mid: #6B6B68;
+    --border: rgba(0,0,0,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-logo span { color: var(--rust); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: #fff; }
+
+  .nav-cta {
+    background: var(--rust);
+    color: #fff !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--rust-dark) !important; color: #fff !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    color: #fff;
+    padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.02) 60px,
+      rgba(255,255,255,0.02) 61px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.02) 60px,
+      rgba(255,255,255,0.02) 61px
+    );
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    position: relative;
+    max-width: 900px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--rust);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.6);
+    margin-top: 1.75rem;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--rust);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--rust-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  /* STRIP */
+  .strip {
+    background: var(--rust);
+    color: #fff;
+    padding: 1rem clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .strip-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* SECTION */
+  section {
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+
+  /* SERVICES */
+  #services { background: var(--cream); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background: var(--off-white);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: #fff; }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--rust-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-icon svg { width: 24px; height: 24px; color: var(--rust); }
+
+  .service-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  /* WHY */
+  #why {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    background: var(--off-white);
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .why-text p {
+    color: var(--mid);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-box {
+    background: var(--black);
+    color: #fff;
+    padding: 1.75rem;
+    border-radius: 8px;
+  }
+
+  .stat-box .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--rust);
+    line-height: 1;
+  }
+
+  .stat-box .label {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.35rem;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--black); color: #fff; }
+
+  #contact .section-title { color: #fff; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .contact-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .contact-card .c-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .contact-card .c-value {
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+
+  .contact-card .c-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--rust);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .contact-card .c-icon svg { width: 18px; height: 18px; color: #fff; }
+
+  .contact-cta {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-cta p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    max-width: 380px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A09;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    #why { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+  .hero h1 { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">HP <span>Rentals</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#book">Book a Trailer</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Edgerton, Wisconsin</p>
+  <h1>Trailer<br><em>Rentals</em><br>Done Right.</h1>
+  <p class="hero-sub">Local, reliable trailer rentals for hauling, moving, and everything in between. Serving the Edgerton area.</p>
+  <div class="hero-actions">
+    <a href="tel:6085019613" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.63 19.79 19.79 0 0111 1.18 2 2 0 0113 3.36v3a2 2 0 01-1.64 2 14 14 0 006.27 6.27A2 2 0 0122 16.92z"/></svg>
+      Call (608) 501-9613
+    </a>
+    <a href="#book" class="btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book Online
+    </a>
+    <a href="mailto:hprentalsofedgerton@gmail.com" class="btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Send an Email
+    </a>
+  </div>
+</div>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    Local & Dependable
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Flexible Scheduling
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    Locally Owned
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Edgerton, WI
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">What we offer</p>
+  <h2 class="section-title">Trailer Rental<br>Services</h2>
+  <p style="color: var(--mid); max-width: 520px; font-size: 1.05rem;">We offer three trailers to cover just about any hauling job. Not sure which one fits? Give us a call and we'll point you in the right direction.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="18" height="10" rx="1"/><path d="M2 11h18"/><path d="M6 17v2"/><path d="M16 17v2"/><rect x="5" y="7" width="14" height="4" rx="0.5"/></svg>
+      </div>
+      <h3>7×14 Enclosed Trailer</h3>
+      <p>Ideal for moving furniture, appliances, motorcycles, or anything that needs to stay protected from the elements. Secure, weatherproof, and spacious.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.1rem; font-size: 0.875rem; color: var(--mid); display: flex; flex-direction: column; gap: 0.3rem;">
+        <li>7 ft wide × 14 ft long interior</li>
+        <li>Fully enclosed & weatherproof</li>
+        <li>Great for moves & hauling valuables</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h14l3-8H3z"/><path d="M3 17l2 4"/><path d="M17 17l2 4"/><circle cx="7" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
+      </div>
+      <h3>7×14 Dump Trailer</h3>
+      <p>Perfect for landscaping, demolition debris, dirt, gravel, mulch, and junk removal. Hydraulic dump makes unloading fast and easy.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.1rem; font-size: 0.875rem; color: var(--mid); display: flex; flex-direction: column; gap: 0.3rem;">
+        <li>7 ft wide × 14 ft long bed</li>
+        <li>Hydraulic dump bed</li>
+        <li>Great for debris, dirt & landscaping</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="16" height="7" rx="1"/><path d="M17 12h4"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="13.5" cy="18.5" r="1.5"/></svg>
+      </div>
+      <h3>6×10 Utility Trailer</h3>
+      <p>Our compact open utility trailer is great for smaller loads — lawn equipment, ATVs, lumber, mulch, and weekend hauls around town.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.1rem; font-size: 0.875rem; color: var(--mid); display: flex; flex-direction: column; gap: 0.3rem;">
+        <li>6 ft wide × 10 ft long bed</li>
+        <li>Open flatbed design</li>
+        <li>Easy loading, great for smaller jobs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; background: var(--off-white); padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);">
+  <div class="why-text">
+    <p class="section-label">Why HP Rentals</p>
+    <h2 class="section-title">Simple.<br>Local.<br>Reliable.</h2>
+    <p>HP Rentals of Edgerton is a locally owned trailer rental business serving Edgerton, Wisconsin and the surrounding area. We keep things straightforward — no complicated processes, just give us a call and we'll get you set up.</p>
+    <p>We're your neighbors. When you rent from us, you're supporting a small local business that genuinely cares about giving you a good experience.</p>
+    <a href="tel:6085019613" class="btn-primary" style="margin-top: 0.5rem; display: inline-flex;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.63 19.79 19.79 0 0111 1.18 2 2 0 0113 3.36v3a2 2 0 01-1.64 2 14 14 0 006.27 6.27A2 2 0 0122 16.92z"/></svg>
+      Call to Reserve
+    </a>
+  </div>
+  <div class="why-stats">
+    <div class="stat-box">
+      <div class="num">608</div>
+      <div class="label">Local Edgerton number</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">WI</div>
+      <div class="label">Wisconsin proud & local</div>
+    </div>
+    <div class="stat-box" style="grid-column: 1 / -1; background: var(--rust);">
+      <div class="num" style="color: #fff; font-size: 2rem;">Fast &amp; Easy</div>
+      <div class="label">Call or email and we'll take care of the rest</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in touch</p>
+  <h2 class="section-title">Ready to Rent?</h2>
+
+  <div class="contact-grid">
+    <a href="tel:6085019613" class="contact-card">
+      <div class="c-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.63 19.79 19.79 0 0111 1.18 2 2 0 0113 3.36v3a2 2 0 01-1.64 2 14 14 0 006.27 6.27A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div class="c-label">Call or Text</div>
+      <div class="c-value">(608) 501-9613</div>
+    </a>
+    <a href="mailto:hprentalsofedgerton@gmail.com" class="contact-card">
+      <div class="c-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="c-label">Email Us</div>
+      <div class="c-value" style="font-size: 0.95rem;">hprentalsofedgerton@gmail.com</div>
+    </a>
+    <div class="contact-card" style="cursor: default;">
+      <div class="c-icon" style="background: var(--steel);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="c-label">Location</div>
+      <div class="c-value">Edgerton, Wisconsin</div>
+    </div>
+  </div>
+
+  <div class="contact-cta">
+    <p>The quickest way to reserve a trailer is to give us a call. We'll answer your questions and get you booked in no time.</p>
+    <a href="tel:6085019613" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.63 19.79 19.79 0 0111 1.18 2 2 0 0113 3.36v3a2 2 0 01-1.64 2 14 14 0 006.27 6.27A2 2 0 0122 16.92z"/></svg>
+      Call (608) 501-9613
+    </a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 <strong>HP Rentals of Edgerton</strong> &nbsp;·&nbsp; Edgerton, Wisconsin &nbsp;·&nbsp; (608) 501-9613 &nbsp;·&nbsp; hprentalsofedgerton@gmail.com
+</footer>
+
+</body>
+</html>
